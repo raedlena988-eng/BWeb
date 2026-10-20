@@ -268,12 +268,26 @@
   <h2 class="section-title fade">What We Do</h2>
   <p class="section-sub fade">From a single room to a full remodel — one trusted crew for your entire project.</p>
   <div class="grid">
-    <div class="card fade"><div class="icon">🪵</div><h3>Hardwood & Laminate</h3><p>Precision installation of hardwood, laminate and luxury vinyl plank with flawless finishes.</p></div>
-    <div class="card fade"><div class="icon">🔧</div><h3>Floor Repair & Sanding</h3><p>Water damage, scratches, warped boards — we restore your floors to like-new condition.</p></div>
-    <div class="card fade"><div class="icon">🏠</div><h3>Home Remodeling</h3><p>Kitchens, bathrooms, additions and whole-home remodels handled start to finish.</p></div>
-    <div class="card fade"><div class="icon">🧱</div><h3>Drywall & Framing</h3><p>Professional drywall repair, wall finishing, and structural framing by experienced pros.</p></div>
-    <div class="card fade"><div class="icon">🛡️</div><h3>Roof Repair</h3><p>Reliable roofing repairs that protect your home — trusted by your neighbors.</p></div>
-    <div class="card fade"><div class="icon">✨</div><h3>Floor Polishing</h3><p>Deep cleaning and polishing that brings out the natural beauty of your floors.</p></div>
+    <div class="card fade"><div class="icon">🪵</div><h3>Floor Tile Installation</h3><p>Expert tile laying with precise subfloor prep, perfect patterns, and clean grout joints.</p></div>
+    <div class="card fade"><div class="icon">🔄</div><h3>Floor Tile Restoration</h3><p>Bring old or damaged tiles back to life — cleaning, regrouting, and protective sealing.</p></div>
+    <div class="card fade"><div class="icon">🔧</div><h3>Flooring Repair</h3><p>We fix worn or damaged hardwood, tile, laminate, and vinyl — fast and done right.</p></div>
+    <div class="card fade"><div class="icon">🏗️</div><h3>Garage Floor Epoxy Coating</h3><p>Durable epoxy coatings that make garage floors resistant to stains, chemicals, and traffic.</p></div>
+    <div class="card fade"><div class="icon">🏠</div><h3>Remodeling</h3><p>Full residential and commercial remodels — from design and demolition to the final finish.</p></div>
+    <div class="card fade"><div class="icon">🧱</div><h3>Drywall Installation</h3><p>Smooth, professional drywall work for new builds, repairs, and remodel projects.</p></div>
+    <div class="card fade"><div class="icon">🍂</div><h3>Gutter Cleaning</h3><p>Clear gutters and downspouts that prevent water damage and protect your property.</p></div>
+    <div class="card fade"><div class="icon">🏢</div><h3>Commercial Floor Coating</h3><p>Protective coatings for commercial spaces — smooth, durable, and built for heavy use.</p></div>
+    <div class="card fade"><div class="icon">🧪</div><h3>Concrete Epoxy Installation</h3><p>Professional epoxy application on concrete — cured for maximum strength and durability.</p></div>
+    <div class="card fade"><div class="icon">💎</div><h3>Concrete Floor Polishing</h3><p>Grinding and polishing that gives concrete floors a sleek, mirror-smooth finish.</p></div>
+    <div class="card fade"><div class="icon">🌤️</div><h3>Concrete Patio Installation</h3><p>Beautiful outdoor patios — poured, leveled, and sealed to last for years.</p></div>
+    <div class="card fade"><div class="icon">🎨</div><h3>Concrete Staining</h3><p>Add rich, vibrant color to concrete with decorative staining and unique finishes.</p></div>
+    <div class="card fade"><div class="icon">🛡️</div><h3>Epoxy Floor Coating</h3><p>Multi-layer epoxy systems that protect and transform any concrete surface.</p></div>
+    <div class="card fade"><div class="icon">✨</div><h3>Floor Polishing</h3><p>Professional polishing for hardwood, concrete, and marble — a brilliant, lasting shine.</p></div>
+    <div class="card fade"><div class="icon">🪄</div><h3>Floor Refinishing</h3><p>Sand away years of wear and apply a fresh finish — your floors look brand new again.</p></div>
+    <div class="card fade"><div class="icon">🧰</div><h3>Floor Repairs & Maintenance</h3><p>Routine care and repairs that keep every type of floor beautiful and functional.</p></div>
+    <div class="card fade"><div class="icon">🪑</div><h3>Furniture Assembly</h3><p>Quick, careful assembly of furniture for homes and businesses — done correctly.</p></div>
+    <div class="card fade"><div class="icon">📐</div><h3>Baseboard Installation</h3><p>Clean, precise trim and molding for a seamless transition between wall and floor.</p></div>
+    <div class="card fade"><div class="icon">🛋️</div><h3>Carpet Installation</h3><p>Measured, stretched, and perfectly secured carpeting for any room.</p></div>
+    <div class="card fade"><div class="icon">🏺</div><h3>Ceramic Tile Installation</h3><p>Careful placement and alignment of ceramic tiles with flawless grouted joints.</p></div>
   </div>
 </section>
 
