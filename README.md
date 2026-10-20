@@ -116,6 +116,18 @@
   footer{background:#1c1207;color:#9c8a72;text-align:center;padding:34px 6vw;font-size:.88rem}
   footer b{color:var(--cream)}
 
+
+  /* ===== 3D INTRO LOADER ===== */
+  #loader{position:fixed;inset:0;z-index:9999;background:radial-gradient(ellipse at 50% 35%,#5a3a1e 0%,#2b1a0b 55%,#160d04 100%);overflow:hidden}
+  #loader3d{position:absolute;inset:0;width:100%;height:100%}
+  .loader-text{position:absolute;left:0;right:0;bottom:14vh;text-align:center;pointer-events:none}
+  .loader-logo{color:var(--cream);font-size:clamp(2rem,7vw,3.4rem);font-weight:800;letter-spacing:6px;animation:logoGlow 2s ease-in-out infinite}
+  .loader-logo span{color:var(--amber)}
+  @keyframes logoGlow{0%,100%{text-shadow:0 0 20px rgba(232,163,61,.3)}50%{text-shadow:0 0 45px rgba(232,163,61,.7)}}
+  .loader-sub{color:#c9ab84;letter-spacing:4px;font-size:clamp(.65rem,2vw,.85rem);margin-top:8px;font-weight:600}
+  .loader-bar{width:min(320px,70vw);height:3px;background:rgba(255,255,255,.15);margin:26px auto 0;border-radius:3px;overflow:hidden}
+  .loader-fill{height:100%;width:0;background:linear-gradient(90deg,var(--wood-light),var(--amber));transition:width .1s linear}
+
   /* fade-in on scroll */
   .fade{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
   .fade.show{opacity:1;transform:none}
@@ -129,6 +141,101 @@
 </style>
 </head>
 <body>
+
+<!-- ===== 3D INTRO LOADER ===== -->
+<div id="loader">
+  <canvas id="loader3d"></canvas>
+  <div class="loader-text">
+    <div class="loader-logo">CT <span>FLOORING</span></div>
+    <div class="loader-sub">SERVICES · REDONDO BEACH</div>
+    <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  // Procedural wood-grain texture
+  function woodTexture(){
+    const c=document.createElement('canvas'); c.width=512; c.height=512;
+    const g=c.getContext('2d');
+    g.fillStyle='#8a5a2e'; g.fillRect(0,0,512,512);
+    for(let i=0;i<512;i++){
+      const shade=Math.sin(i*0.045)*22+Math.random()*14;
+      g.fillStyle=`rgba(${60+shade},${38+shade*0.6},${18+shade*0.3},0.55)`;
+      g.fillRect(0,i,512,1+Math.random()*2);
+    }
+    for(let i=0;i<26;i++){
+      g.strokeStyle='rgba(45,25,10,'+(0.15+Math.random()*0.25)+')';
+      g.lineWidth=1+Math.random()*2; g.beginPath();
+      let y=Math.random()*512; g.moveTo(0,y);
+      for(let x=0;x<=512;x+=32) g.lineTo(x,y+Math.sin(x*0.02+i)*6+(Math.random()-0.5)*5);
+      g.stroke();
+    }
+    const t=new THREE.CanvasTexture(c);
+    t.wrapS=t.wrapT=THREE.RepeatWrapping;
+    return t;
+  }
+
+  const canvas=document.getElementById('loader3d');
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setSize(innerWidth,innerHeight);
+
+  const scene=new THREE.Scene();
+  scene.fog=new THREE.FogExp2(0x241608,0.055);
+  const camera=new THREE.PerspectiveCamera(55,innerWidth/innerHeight,0.1,100);
+  camera.position.set(0,0,11);
+
+  scene.add(new THREE.AmbientLight(0xffe6c0,0.55));
+  const key=new THREE.DirectionalLight(0xffd9a0,1.4); key.position.set(5,8,6); scene.add(key);
+  const rim=new THREE.DirectionalLight(0xe8a33d,0.9); rim.position.set(-6,-4,3); scene.add(rim);
+
+  const tex=woodTexture();
+  const planks=[];
+  for(let i=0;i<46;i++){
+    const w=1.6+Math.random()*2.4, h=0.22+Math.random()*0.16, d=0.5+Math.random()*0.4;
+    const m=new THREE.Mesh(
+      new THREE.BoxGeometry(w,h,d),
+      new THREE.MeshStandardMaterial({map:tex,color:new THREE.Color().setHSL(0.07+Math.random()*0.03,0.5,0.35+Math.random()*0.18),roughness:0.75})
+    );
+    m.position.set((Math.random()-0.5)*18,(Math.random()-0.5)*10,(Math.random()-0.5)*8-1);
+    m.rotation.set(Math.random()*Math.PI,Math.random()*Math.PI,Math.random()*Math.PI);
+    m.userData={rs:(Math.random()-0.5)*0.012, fs:0.3+Math.random()*0.7, yo:m.position.y, ph:Math.random()*Math.PI*2};
+    scene.add(m); planks.push(m);
+  }
+
+  let t=0, raf;
+  const start=performance.now();
+  function animate(){
+    t+=0.016;
+    planks.forEach(p=>{
+      p.rotation.x+=p.userData.rs; p.rotation.y+=p.userData.rs*1.4;
+      p.position.y=p.userData.yo+Math.sin(t*p.userData.fs+p.userData.ph)*0.6;
+    });
+    camera.position.x=Math.sin(t*0.15)*1.2;
+    camera.lookAt(0,0,0);
+    renderer.render(scene,camera);
+    // progress bar over ~3.2s
+    const prog=Math.min((performance.now()-start)/3200,1);
+    document.getElementById('loaderFill').style.width=(prog*100)+'%';
+    if(prog<1){ raf=requestAnimationFrame(animate); }
+    else{
+      const L=document.getElementById('loader');
+      L.style.transition='opacity .9s ease, transform .9s ease';
+      L.style.opacity='0'; L.style.transform='scale(1.06)';
+      setTimeout(()=>{L.style.display='none'; cancelAnimationFrame(raf); renderer.dispose();},950);
+      document.body.style.overflow='';
+    }
+  }
+  document.body.style.overflow='hidden';
+  addEventListener('resize',()=>{
+    camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth,innerHeight);
+  });
+  animate();
+})();
+</script>
+
 
 <nav>
   <div class="logo"><span class="logo-badge">🪵</span> CT Flooring Services</div>
